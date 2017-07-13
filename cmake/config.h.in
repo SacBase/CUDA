@@ -1,0 +1,2 @@
+/* CUDA runtime checks */
+#cmakedefine ENABLE_CUDA_CHECK

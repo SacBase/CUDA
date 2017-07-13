@@ -1,0 +1,6 @@
+class CUDAEventType;
+external classtype;
+  #pragma freefun "free_event"
+  #pragma linkobj "src/CUDAEventType/free_event.o"
+
+export {CUDAEventType};

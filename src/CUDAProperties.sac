@@ -1,0 +1,35 @@
+class CUDAProperties;
+external classtype;
+
+use String: all;
+
+export {getCUDAProperties, getGPUName, getGPUCC, getCUDAVersions};
+
+external typedef CUDADeviceProps;
+  #pragma freefun "free_props"
+  #pragma linkobj "src/CUDAProperties/free_props.o"
+
+external objdef CUDAProperties CUDAPropsObj;
+
+external CUDADeviceProps getCUDAProperties( int device_id);
+  #pragma effect CUDAProperties::CUDAPropsObj
+  #pragma linkname "load_cuda_properties"
+  #pragma linkobj "src/CUDAProperties/access_props.o"
+  #pragma linksign [0,1]
+
+external string getGPUName( CUDADeviceProps prop);
+  #pragma effect CUDAProperties::CUDAPropsObj
+  #pragma linkname "get_gpu_name"
+  #pragma linkobj "src/CUDAProperties/access_props.o"
+  #pragma linksign [0,1]
+
+external string getGPUCC( CUDADeviceProps prop);
+  #pragma effect CUDAProperties::CUDAPropsObj
+  #pragma linkname "get_gpu_cc"
+  #pragma linkobj "src/CUDAProperties/access_props.o"
+  #pragma linksign [0,1]
+
+external string getCUDAVersions( );
+  #pragma linkname "get_cuda_versions"
+  #pragma linkobj "src/CUDAProperties/extra_props.o"
+  #pragma linksign [0]

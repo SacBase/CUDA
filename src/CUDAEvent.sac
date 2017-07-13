@@ -1,0 +1,33 @@
+class CUDAEvent;
+external classtype;
+
+use CUDAEventType: all;
+
+export {createCUDAEvent, doCUDAEventRecord, doCUDAEventSync,
+        getCUDAEventElapsed};
+
+external objdef CUDAEvent CUDAEventObj;
+
+external CUDAEventType createCUDAEvent( );
+  #pragma effect CUDAEvent::CUDAEventObj
+  #pragma linkname "create_cuda_event"
+  #pragma linkobj "src/CUDAEvent/cuda_event.o"
+  #pragma linksign [0]
+
+external void doCUDAEventRecord( CUDAEventType& event);
+  #pragma effect CUDAEvent::CUDAEventObj
+  #pragma linkname "cuda_event_record"
+  #pragma linkobj "src/CUDAEvent/cuda_event.o"
+  #pragma linksign [1]
+
+external void doCUDAEventSync( CUDAEventType& event);
+  #pragma effect CUDAEvent::CUDAEventObj
+  #pragma linkname "cuda_event_sync"
+  #pragma linkobj "src/CUDAEvent/cuda_event.o"
+  #pragma linksign [1]
+
+external float getCUDAEventElapsed( CUDAEventType event1, CUDAEventType event2);
+  #pragma effect CUDAEvent::CUDAEventObj
+  #pragma linkname "cuda_elapsed_time"
+  #pragma linkobj "src/CUDAEvent/cuda_event.o"
+  #pragma linksign [0,1,2]
